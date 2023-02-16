@@ -18,6 +18,6 @@ func init() {
 
 	DB.AutoMigrate(
 		&model.Credential{},
-		&model.Cluster{},
+		// &model.Cluster{},
 	)
 }
