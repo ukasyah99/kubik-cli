@@ -1,5 +1,0 @@
-package credential
-
-func Create() {
-
-}

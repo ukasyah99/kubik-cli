@@ -3,6 +3,8 @@ package credential
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
+	"unicode/utf8"
 
 	"github.com/spf13/cobra"
 	"github.com/ukasyah99/kubik-cli/db"
@@ -17,6 +19,11 @@ var GetCredentialCmd = &cobra.Command{
 		data := []model.Credential{}
 
 		db.DB.Find(&data)
+
+		for i := 0; i < len(data); i++ {
+			// hide token value by changing all chars to asterisk
+			data[i].Token = strings.Repeat("*", utf8.RuneCountInString(data[i].Token))
+		}
 
 		result, _ := json.MarshalIndent(data, "", "  ")
 		fmt.Println(string(result))
