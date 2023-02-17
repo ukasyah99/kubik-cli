@@ -29,11 +29,11 @@ func (c *Credential) Save() error {
 		// Update existing credential
 
 		// Check if record exists
-		exists, err := Exists(c.ID)
+		exist, err := Exist(c.ID)
 		if err != nil {
 			return err
 		}
-		if !exists {
+		if !exist {
 			return errors.New("credential not found")
 		}
 
@@ -43,7 +43,7 @@ func (c *Credential) Save() error {
 	return nil
 }
 
-func Exists(id string) (bool, error) {
+func Exist(id string) (bool, error) {
 	var count int64
 	err := db.DB.Model(&model.Credential{}).Count(&count).Error
 	if err != nil {
